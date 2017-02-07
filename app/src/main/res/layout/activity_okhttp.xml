@@ -18,6 +18,12 @@
         android:layout_height="wrap_content"
         android:text="post请求" />
 
+    <Button
+        android:id="@+id/btn_post_okhttp_utils"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="okhttputils_get请求" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">

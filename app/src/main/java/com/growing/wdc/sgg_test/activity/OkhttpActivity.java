@@ -1,6 +1,7 @@
 package com.growing.wdc.sgg_test.activity;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -8,11 +9,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.growing.wdc.sgg_test.R;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.io.IOException;
 
+import okhttp3.Call;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -29,6 +34,7 @@ public class OkhttpActivity extends Activity implements View.OnClickListener {
     private static final int POSTOK = 45678;
     protected Button btnGet;
     protected Button btnPost;
+    protected Button btn_post_okhttp_utils;
     protected TextView txt_result;
     public static final MediaType JSON
             = MediaType.parse("application/json; charset=utf-8");//okhttp编码
@@ -50,10 +56,13 @@ public class OkhttpActivity extends Activity implements View.OnClickListener {
         }
     };
 
+    MyStringCallback httputilsCallBack = new MyStringCallback();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.activity_okhttp);
+
         initView();
 
     }
@@ -80,6 +89,10 @@ public class OkhttpActivity extends Activity implements View.OnClickListener {
                     }
                 }.start();
                 break;
+
+            case R.id.btn_post_okhttp_utils:
+                getDataByOkhttpUtil();
+                break;
             default:
                 break;
         }
@@ -92,6 +105,8 @@ public class OkhttpActivity extends Activity implements View.OnClickListener {
         btnPost = (Button) findViewById(R.id.btn_post);
         btnPost.setOnClickListener(OkhttpActivity.this);
         txt_result = (TextView) findViewById(R.id.txt_result);
+        btn_post_okhttp_utils = (Button) findViewById(R.id.btn_post_okhttp_utils);
+        btn_post_okhttp_utils.setOnClickListener(this);
     }
 
 
@@ -139,13 +154,13 @@ public class OkhttpActivity extends Activity implements View.OnClickListener {
         }.start();
     }
 
-    private void getDateFromPost(){
+    private void getDateFromPost() {
         new Thread() {
             @Override
             public void run() {
                 super.run();
                 try {
-                    String result = ok_post("http://api.m.mtime.cn/PageSubArea/TrailerList.api","");
+                    String result = ok_post("http://api.m.mtime.cn/PageSubArea/TrailerList.api", "");
                     Log.e(TAG, result);
                     Message msg = new Message();
                     msg.what = POSTOK;
@@ -156,5 +171,63 @@ public class OkhttpActivity extends Activity implements View.OnClickListener {
                 }
             }
         }.start();
+    }
+
+    /**
+     * okhttputils
+     */
+    public void getDataByOkhttpUtil() {
+        //通过httputils框架 post请求
+//        String weatherURL = "https://api.thinkpage.cn/v3/weather/now.json?key=5emeqa2c0nqszhdc&location=beijing&language=zh-Hans&unit=c";
+        String weatherURL = "http://api.m.mtime.cn/PageSubArea/TrailerList.api";
+        OkHttpUtils
+                .post()
+                .url(weatherURL)
+                .addParams("username", "hyman")
+                .addParams("password", "123")
+                .build()
+                .execute(httputilsCallBack);
+    }
+
+
+    public class MyStringCallback extends StringCallback {
+        @Override
+        public void onBefore(Request request, int id) {
+            setTitle("loading...");
+        }
+
+        @Override
+        public void onAfter(int id) {
+            setTitle("Sample-okHttp");
+        }
+
+        @Override
+        public void onError(Call call, Exception e, int id) {
+            e.printStackTrace();
+            txt_result.setText("onError:" + e.getMessage());
+        }
+
+        @Override
+        public void onResponse(String response, int id) {
+            Log.e(TAG, "onResponse：complete");
+            txt_result.setText("onResponse:" + response);
+
+            switch (id) {
+                case 100:
+                    Toast.makeText(OkhttpActivity.this, "http", Toast.LENGTH_SHORT).show();
+                    break;
+                case 101:
+                    Toast.makeText(OkhttpActivity.this, "https", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+
+        @Override
+        public void inProgress(float progress, long total, int id) {
+            Log.e(TAG, "inProgress:" + progress);
+//            mProgressBar.setProgress((int) (100 * progress));
+            txt_result.setText("Loadding");
+
+        }
     }
 }
