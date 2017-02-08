@@ -1,4 +1,6 @@
 # wdc_android_repository
 大川知识库
 
- 准备自己积累一些东西 正在进行 okhttp的框架使用学习
+    1.okhttp原生使用方法
+    2.okhttputils使用方法
+    3.RecyclerView的使用方法
