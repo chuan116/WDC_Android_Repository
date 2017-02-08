@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.growing.wdc.sgg_test.Base.BaseFragment;
 import com.growing.wdc.sgg_test.R;
 import com.growing.wdc.sgg_test.activity.OkhttpActivity;
+import com.growing.wdc.sgg_test.activity.recyclerview.RecyclerViewActivity;
 import com.growing.wdc.sgg_test.adapter.CommonFrameFragmentAdapter;
 
 /**
@@ -34,8 +35,11 @@ public class CommonFrameFragment extends BaseFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String data = s[position];
-                if(data.toLowerCase().equals("okhttp")){
-                    Intent intent =  new Intent(mContext,OkhttpActivity.class);
+                if (data.toLowerCase().equals("okhttp")) {
+                    Intent intent = new Intent(mContext, OkhttpActivity.class);
+                    mContext.startActivity(intent);
+                } else if (data.toLowerCase().equals("recyclerview")) {
+                    Intent intent = new Intent(mContext, RecyclerViewActivity.class);
                     mContext.startActivity(intent);
                 }
                 Toast.makeText(mContext, data, Toast.LENGTH_SHORT).show();
@@ -50,7 +54,7 @@ public class CommonFrameFragment extends BaseFragment {
         super.initDate();
         Log.e(TAG, "常用框架Fragment页面的数据被初始化");
         //设置适配器
-        s = new String[]{"okhttp", "xutils3", "Retrofit2"};
+        s = new String[]{"okhttp", "xutils3", "Retrofit2", "RecyclerView"};
         CommonFrameFragmentAdapter adp = new CommonFrameFragmentAdapter(mContext, s);
         mlistview.setAdapter(adp);
     }
