@@ -3,15 +3,19 @@ package com.growing.wdc.sgg_test.activity.recyclerview;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.growing.wdc.sgg_test.R;
 import com.growing.wdc.sgg_test.adapter.MyRecyclerViewAdapter;
+import com.growing.wdc.sgg_test.adapter.MyRecyclerViewAdapter_Flow;
 
 import java.util.ArrayList;
 
@@ -38,7 +42,15 @@ public class RecyclerViewActivity extends Activity implements View.OnClickListen
         //设置recyclerview 适配器
         adapter = new MyRecyclerViewAdapter(this, datas);
         recyclerview.setAdapter(adapter);
-        recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayout.VERTICAL, false));
+        //设置点击某条监听
+        adapter.setOnItemClickListener(new MyRecyclerViewAdapter.MyOnitemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Toast.makeText(RecyclerViewActivity.this, "点击了第" + position, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
     }
 
     private void initView() {
@@ -74,14 +86,21 @@ public class RecyclerViewActivity extends Activity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_add:
+                adapter.addData(0, "new_Content");
+                recyclerview.scrollToPosition(0);
                 break;
             case R.id.btn_delete:
+                adapter.removeData(0);
                 break;
             case R.id.btn_list:
+                recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayout.VERTICAL, false));
                 break;
             case R.id.btn_grid:
+                recyclerview.setLayoutManager(new GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false));
                 break;
             case R.id.btn_flow:
+                recyclerview.setAdapter(new MyRecyclerViewAdapter_Flow(RecyclerViewActivity.this, datas));
+                recyclerview.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
                 break;
             default:
                 break;
