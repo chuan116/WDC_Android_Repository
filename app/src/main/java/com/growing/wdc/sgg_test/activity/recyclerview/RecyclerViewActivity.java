@@ -2,7 +2,6 @@ package com.growing.wdc.sgg_test.activity.recyclerview;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -78,6 +77,7 @@ public class RecyclerViewActivity extends Activity implements View.OnClickListen
         datas = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
             datas.add(i + "");
+
 
         }
     }
