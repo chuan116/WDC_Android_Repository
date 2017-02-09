@@ -13,6 +13,10 @@ import android.widget.Toast;
 import com.growing.wdc.sgg_test.Base.BaseFragment;
 import com.growing.wdc.sgg_test.R;
 import com.growing.wdc.sgg_test.activity.OkhttpActivity;
+import com.growing.wdc.sgg_test.activity.eventbus.EventBusActivity;
+import com.growing.wdc.sgg_test.activity.fresco.FrescoActivity;
+import com.growing.wdc.sgg_test.activity.imageloader.ImageLoaderActivity;
+import com.growing.wdc.sgg_test.activity.pulltorefresh.PullToRefreshActivity;
 import com.growing.wdc.sgg_test.activity.recyclerview.RecyclerViewActivity;
 import com.growing.wdc.sgg_test.adapter.CommonFrameFragmentAdapter;
 
@@ -41,11 +45,23 @@ public class CommonFrameFragment extends BaseFragment {
                 } else if (data.toLowerCase().equals("recyclerview")) {
                     Intent intent = new Intent(mContext, RecyclerViewActivity.class);
                     mContext.startActivity(intent);
+                } else if (data.toLowerCase().equals("pulltorefresh")) {
+                    Intent intent = new Intent(mContext, PullToRefreshActivity.class);
+                    mContext.startActivity(intent);
+                } else if (data.toLowerCase().equals("eventbus")) {
+                    Intent intent = new Intent(mContext, EventBusActivity.class);
+                    mContext.startActivity(intent);
+                } else if (data.toLowerCase().equals("imageloader")) {
+                    Intent intent = new Intent(mContext, ImageLoaderActivity.class);
+                    mContext.startActivity(intent);
+                } else if (data.toLowerCase().equals("fresco")) {
+                    //谷歌fresco图片加载控件
+                    Intent intent = new Intent(mContext, FrescoActivity.class);
+                    mContext.startActivity(intent);
                 }
                 Toast.makeText(mContext, data, Toast.LENGTH_SHORT).show();
             }
         });
-
         return view;
     }
 
@@ -54,7 +70,7 @@ public class CommonFrameFragment extends BaseFragment {
         super.initDate();
         Log.e(TAG, "常用框架Fragment页面的数据被初始化");
         //设置适配器
-        s = new String[]{"okhttp", "xutils3", "Retrofit2", "RecyclerView"};
+        s = new String[]{"okhttp", "PullToRefresh", "RecyclerView", "EventBus", "ImageLoader", "Fresco"};
         CommonFrameFragmentAdapter adp = new CommonFrameFragmentAdapter(mContext, s);
         mlistview.setAdapter(adp);
     }

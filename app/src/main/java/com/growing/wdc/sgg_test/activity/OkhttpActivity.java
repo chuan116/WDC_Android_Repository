@@ -179,12 +179,14 @@ public class OkhttpActivity extends Activity implements View.OnClickListener {
     public void getDataByOkhttpUtil() {
         //通过httputils框架 post请求
 //        String weatherURL = "https://api.thinkpage.cn/v3/weather/now.json?key=5emeqa2c0nqszhdc&location=beijing&language=zh-Hans&unit=c";
-        String weatherURL = "http://api.m.mtime.cn/PageSubArea/TrailerList.api";
+//        String weatherURL = "http://api.m.mtime.cn/PageSubArea/TrailerList.api";
+//        http://199.66.68.126:8080/ZHSQ/mobileLogin.idt?username=1&pwd=1
+        String weatherURL = "http://199.66.68.126:8080/ZHSQ/mobileLogin.idt";
         OkHttpUtils
                 .post()
                 .url(weatherURL)
-                .addParams("username", "hyman")
-                .addParams("password", "123")
+                .addParams("username", "1")
+                .addParams("pwd", "1")
                 .build()
                 .execute(httputilsCallBack);
     }

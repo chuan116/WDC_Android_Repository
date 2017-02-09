@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_event_bus_send"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="com.growing.wdc.sgg_test.activity.eventbus.EventBusSendActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/thitlebar" />
+
+        <Button
+            android:id="@+id/btn_send"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="向主线程发送事件" />
+
+        <Button
+            android:id="@+id/btn_to_send_nian"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="接收粘性事件" />
+
+        <Button
+            android:id="@+id/btn_aysnc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="在当前activity中异步请求数据" />
+
+        <TextView
+            android:id="@+id/txt_nian"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</RelativeLayout>

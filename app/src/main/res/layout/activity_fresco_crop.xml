@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_fresco_crop"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.growing.wdc.sgg_test.activity.fresco.FrescoCropActivity">
+
+
+    <include layout="@layout/thitlebar" />
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/my_image_view"
+        android:layout_width="130dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        fresco:placeholderImage="@drawable/ic_launcher" />
+
+    <TextView
+        android:id="@+id/txt_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="功能描述" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <Button
+                android:id="@+id/btn_focuscrop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="FocusCrop" />
+
+            <Button
+                android:id="@+id/btn_centerinside"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CenterInside" />
+
+            <Button
+                android:id="@+id/btn_fitcenter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="FitCenter" />
+
+            <Button
+                android:id="@+id/btn_fitstart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="FitStart" />
+
+            <Button
+                android:id="@+id/btn_fitend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="FitEnd" />
+
+            <Button
+                android:id="@+id/btn_fitxy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="FitXY" />
+
+            <Button
+                android:id="@+id/btn_centercrop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CenterCrop" />
+
+            <Button
+                android:id="@+id/btn_none"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="None" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
